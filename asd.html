@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>15 Mensajes Especiales</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff5f5;
+            font-family: sans-serif;
+            gap: 20px;
+        }
+        input {
+            padding: 15px;
+            font-size: 1.5rem;
+            border: 2px solid #ff4d6d;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            color: #ff4d6d;
+            outline: none;
+            background-color: white;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        button:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+<audio scr="https://drive.google.com/file/d/1R066I_ksUlscQKMDeS8TflSCOadL0Btm/view?usp=drive_open" controls></audio>
+<h1 style="color:pink"> 예솔 답변 </h1>
+    <input type="text" id="inputAmor" placeholder="질문하다" autocomplete="off">
+    <button id="btnCambiar">Siguiente mensaje (1/15)</button>
+
+<script>
+    const input = document.getElementById('inputAmor');
+    const btn = document.getElementById('btnCambiar');
+
+    // Lista de 15 mensajes
+    const listaMensajes = [
+        "바람의 감촉이 당신에게 나를 떠올리게 하는군요.",
+        "달이 당신의 사랑을 내게 전합니다.",
+        "당신 눈빛의 반짝임, 별빛의 찬란함",
+        "네 원칙을 굳게 지켜라, 사랑한다.",
+        "당신은 제게 정말 소중한 사람이에요.",
+        "달이 떠오를 때면 당신 생각이 나요.",
+        "나는 당신 안에서 평화를 찾습니다",
+        "네가 내 자존심을 짓밟았어",
+        "멀리서 당신은 내게 가르쳐주셨습니다",
+        "당신의 예시가 저를 매료시켰습니다.",
+        "모든 걸 바로잡아주는 바람 ;)",
+        "당신은 절대 유행에 뒤처지지 않을 거예요",
+        "당신의 규율은 매우 귀중합니다.",
+        "당신의 미소는 나의 보물입니다 ",
+        "난 너 말고는 사랑을 몰라"
+    ];
+
+    let mensajeActualIndex = 0;
+    let letraIndex = 0;
+
+    // Lógica para escribir letra por letra
+    input.addEventListener('keydown', (e) => {
+        e.preventDefault();
+        
+        if (e.key === "Backspace") {
+            input.value = "";
+            letraIndex = 0;
+            return;
+        }
+
+        let frase = listaMensajes[mensajeActualIndex];
+        input.value += frase[letraIndex];
+
+        // Avanza letra y reinicia si termina la frase
+        letraIndex = (letraIndex + 1) % frase.length;
+    });
+
+    // Lógica para cambiar al siguiente mensaje
+    btn.addEventListener('click', () => {
+        // Cambia al siguiente índice de la lista
+        mensajeActualIndex = (mensajeActualIndex + 1) % listaMensajes.length;
+        
+        // Reinicia el input y el contador de letras
+        input.value = "";
+        letraIndex = 0;
+        
+        // Actualiza el texto del botón
+        btn.innerText = `Siguiente mensaje (${mensajeActualIndex + 1}/15)`;
+        
+        input.placeholder = "Escribe el nuevo mensaje...";
+        input.focus();
+    });
+</script>
+
+</body>
+</html>
+
